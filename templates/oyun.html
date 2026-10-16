@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block baslik %}{{ oyun.ad }}{% endblock %}
+
+{% block icerik %}
+<a href="{{ url_for('anasayfa') }}">← Geri</a>
+<h1>{{ oyun.ad }}</h1>
+<p>{{ oyun.aciklama }}</p>
+
+<div id="oyun-alani">
+    {% if oyun.slug == "sayi-tahmin" %}
+        <p id="sayac">Deneme: 0</p>
+        <input type="number" id="tahmin" min="1" max="100" placeholder="Tahminin">
+        <button id="tahmin-buton" class="buton">Tahmin Et</button>
+        <p id="mesaj"></p>
+        <button id="yeniden" class="buton" style="display:none">Yeniden Oyna</button>
+
+    {% elif oyun.slug == "hafiza" %}
+        <p id="hamle">Hamle: 0</p>
+        <div id="tahta"></div>
+        <p id="hafiza-mesaj"></p>
+        <button id="yeniden-baslat" class="buton">Yeniden Başlat</button>
+
+    {% elif oyun.slug == "yilan" %}
+        <p>
+            <label>Mod:
+                <select id="yilan-mod">
+                    <option value="duvarli">Duvarlı (klasik)</option>
+                    <option value="duvarsiz">Duvarsız (içinden geçer)</option>
+                </select>
+            </label>
+        </p>
+        <p>
+            <span id="yilan-skor">Skor: 0</span> |
+            <span id="yilan-en-yuksek">En yüksek: 0</span>
+        </p>
+        <canvas id="yilan-canvas" width="400" height="400"></canvas>
+        <p>Ok tuşları veya W A S D ile yönlendir. Space: duraklat.</p>
+        <button id="yilan-baslat" class="buton">Başlat</button>
+
+    {% elif oyun.slug == "kelime" %}
+        <div id="parolla-daire">
+            <div id="parolla-orta">
+                <div id="parolla-sure">150</div>
+                <div id="parolla-skor">Doğru: 0</div>
+            </div>
+        </div>
+
+        <div id="parolla-panel">
+            <p id="parolla-soru">Başlamak için butona bas.</p>
+            <input type="text" id="parolla-girdi" placeholder="Cevabını yaz" autocomplete="off" disabled>
+            <button id="parolla-cevapla" class="buton" disabled>Cevapla</button>
+            <button id="parolla-pas" class="buton" disabled>Pas</button>
+        </div>
+
+        <p id="parolla-mesaj"></p>
+        <div id="parolla-sonuc"></div>
+        <button id="parolla-baslat" class="buton">Başlat</button>
+
+    {% else %}
+        <p>Bu oyun yakında geliyor.</p>
+    {% endif %}
+</div>
+
+{% if oyun.slug == "sayi-tahmin" %}
+<script src="{{ url_for('static', filename='js/sayi-tahmin.js') }}"></script>
+{% elif oyun.slug == "hafiza" %}
+<script src="{{ url_for('static', filename='js/hafiza.js') }}"></script>
+{% elif oyun.slug == "yilan" %}
+<script src="{{ url_for('static', filename='js/yilan.js') }}"></script>
+{% elif oyun.slug == "kelime" %}
+<script src="{{ url_for('static', filename='js/kelime.js') }}"></script>
+{% endif %}
+{% endblock %}

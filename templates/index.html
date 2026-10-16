@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block icerik %}
+<h1>Bir oyun seç</h1>
+
+<div class="kartlar">
+    {% for o in oyunlar %}
+    <a class="kart" href="{{ url_for('oyun', slug=o.slug) }}">
+        <h2>{{ o.ad }}</h2>
+        <p>{{ o.aciklama }}</p>
+        <span class="buton">Oyna</span>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block baslik %}Oyun Sitesi{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('anasayfa') }}" class="logo">🎮 Oyun Sitesi</a>
+    </header>
+
+    <main>
+        {% block icerik %}{% endblock %}
+    </main>
+
+    <footer>Kendi yaptığım oyunlar</footer>
+</body>
+</html>
